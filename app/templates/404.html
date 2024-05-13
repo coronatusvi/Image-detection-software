@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>License Plate Recognition</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="intro">
+    <h1>Welcome to the License Plate Recognition Website</h1>
+    <p>Here, you can upload an image of a vehicle, and we will quickly and accurately recognize its license plate for
+      you.</p>
+    <p>Our license plate recognition technology utilizes advanced machine learning and image processing algorithms,
+      ensuring reliable results.</p>
+  </div>
+  <div id="upload">
+    <h2>Upload Your Vehicle Image</h2>
+    <form method="POST" action="{{ url_for('pages_module.ocr_api') }}" enctype="multipart/form-data">
+      <input type="file" name="file" required>
+      <button type="submit">Recognize License Plate</button>
+    </form>
+  </div>
+</body>
+
+</html>

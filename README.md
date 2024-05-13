@@ -1,2 +1,52 @@
-# flask-scan-license-plate
- Flask-Scan-License-Plate Flask-Scan-License-Plate is a web application built with the Flask framework in Python. It provides a simple and efficient way to recognize and extract license plate numbers from vehicle images. The application leverages computer vision and deep learning techniques to accurately detect and read license plates, making it a valuable tool for various applications such as parking management, toll systems, and law enforcement. Key Features  License Plate Detection: The application utilizes advanced object detection algorithms to locate and extract license plate regions from uploaded images or video frames. Optical Character Recognition (OCR): Once the license plate region is identified, the application employs state-of-the-art OCR techniques to accurately recognize and extract the license plate number. RESTful API: Flask-Scan-License-Plate exposes a RESTful API endpoint that allows users to submit images or video frames for license plate recognition. The API returns the detected license plate number or an appropriate error message. User-Friendly Interface: In addition to the API, the application provides a user-friendly web interface where users can upload images or video files for license plate recognition. The recognized license plate numbers are displayed on the interface for easy viewing. Customizable and Extensible: The application is designed to be customizable and extensible, allowing developers to integrate their own object detection and OCR models or leverage pre-trained models for improved performance.  Getting Started To get started with Flask-Scan-License-Plate, follow these steps:  Clone the repository from the GitHub link provided. Install the required dependencies listed in the requirements.txt file. Configure the application settings and paths to the pre-trained models (if applicable). Run the Flask application using the provided scripts or commands. Access the web interface or interact with the API endpoint to recognize license plates from images or video frames.  Flask-Scan-License-Plate is an open-source project, and contributions from the community are welcome. Check the repository for detailed documentation, usage examples, and contribution guidelines.
+### Flask Starter Web Development
+
+- You should have Python Environment before install flask-starter app
+  - python3
+  - virtualenv
+  - pip3
+
+> Mac OS
+
+```bash
+brew install python3
+pip3 install virtualenv
+```
+
+> Ubuntu
+
+```bash
+sudo apt-get install -y python3 python3-pip python3-virtualenv
+```
+
+- Checkout Project
+
+```bash
+cd ~/your/path
+git clone git@github.com:kienphan/flask-starter.git
+```
+
+- Go to inside Project and install
+
+```bash
+cd ~/your/path/flask-starter
+virtualenv venv
+cp .env.example .env
+source .env
+```
+
+- Install Flask
+
+```bash
+pip3 install flask
+```
+
+- Execute `run.py` to run
+
+```bash
+$ python3 run.py
+
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+* Restarting with stat
+* Debugger is active!
+* Debugger PIN: 118-513-369
+```
