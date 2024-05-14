@@ -282,5 +282,5 @@ RESIZED_IMAGE_HEIGHT = 30
   RESIZED_IMAGE_WIDTH and RESIZED_IMAGE_HEIGHT are the dimensions to which the image is resized for character recognition.
 
 3. Read and resize the image:
-![alt text](/images/image.png)
+![alt text](/docs/image.png)
 https://github.com/mrzaizai2k/VIETNAMESE_LICENSE_PLATE/blob/master/Image_test2.py

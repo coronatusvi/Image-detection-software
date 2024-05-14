@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, request
-
-from app.mod_pages.function import recognize_license_plate
+from flask import Flask, request, jsonify
+import easyocr
+from PIL import Image
+import io
 
 app = Flask(__name__)
 
@@ -8,26 +9,22 @@ app = Flask(__name__)
 def hello():
     return 'Hello, World!'
 
+reader = easyocr.Reader(['en']) 
 @app.route('/scan-license-plate', methods=['POST'])
-def scan_api():
-    # return "Xin chào Quang"
-    # Xử lý yêu cầu POST
-    if 'file' not in request.files:
-        return 'No file uploaded', 400
-    file = request.files['file']
-
-    # Kiểm tra xem có phải là tệp tin hợp lệ hay không
-    if file.filename == '':
-        return 'No file selected', 400
-
+def ocr():
+    if 'image' not in request.files:
+        return jsonify({"error": "No image provided"}), 400
     # Lấy đường dẫn của tệp tin
-    file_path = file.filename
-    # return 'Đã lấy được file ' + file_path
+    image_file = request.files['image']
+    
+    # Lấy đường dẫn của tệp tin
+    file_path = image_file.filename
 
-    result = recognize_license_plate(file_path)
+    image_bytes = image_file.read()
 
-    # Trả về kết quả
-    if result:
-        return jsonify({"plate_number": result})
-    else:
-        return 'Could not recognize license plate'
+    result = reader.readtext(image_bytes)
+    text = " ".join([res[1] for res in result])
+
+    if text == "": 
+        return jsonify({"text": file_path})
+    return jsonify({"text": text})
