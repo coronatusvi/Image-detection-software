@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import easyocr
 from PIL import Image
-import io
 
 app = Flask(__name__)
 
@@ -12,10 +11,10 @@ def hello():
 reader = easyocr.Reader(['en']) 
 @app.route('/scan-license-plate', methods=['POST'])
 def ocr():
-    if 'image' not in request.files:
+    if 'fileImage' not in request.files:
         return jsonify({"error": "No image provided"}), 400
     # Lấy đường dẫn của tệp tin
-    image_file = request.files['image']
+    image_file = request.files['fileImage']
     
     # Lấy đường dẫn của tệp tin
     file_path = image_file.filename
