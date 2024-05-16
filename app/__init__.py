@@ -25,7 +25,7 @@ def ocr():
 
 
 @app.route('/scan-license-plate', methods=['POST'])
-def ocr():
+def scan_license_plate():
     if 'fileImage' not in request.files:
         return jsonify({"error": "No image provided"}), 400
     # Lấy đường dẫn của tệp tin
