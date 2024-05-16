@@ -1,28 +1,39 @@
-import json
-# from openalpr import Alpr
 import easyocr
+import re
+import io
+from PIL import Image
+import numpy as np
 
 reader = easyocr.Reader(['en'])
 
-def recognize_license_plate(file_path):
-    with open(file_path, 'rb') as f:
-        image_bytes = f.read()
-    result = reader.readtext(image_bytes)
-    text = " ".join([res[1] for res in result])
-    return text
+def is_license_plate(text):
+    pattern = r'\b\d{2}-[A-Z]{1}\d{1}\d{3}[\.\-]?\d{2}\b'
+    return bool(re.search(pattern, text))
 
-    alpr = Alpr("us", "/etc/openalpr/openalpr.conf", "/usr/share/openalpr/runtime_data")
-    if not alpr.is_loaded():
-        return "Error loading OpenALPR"
+def process_text(text):
+    # Loại bỏ khoảng trắng và ký tự xuống dòng thừa
+    cleaned_text = re.sub(r'[\s\n\r]+', '', text)
 
-    results = alpr.recognize_file(file_path)
-    alpr.unload()
+    for i in range(len(cleaned_text) - 1):
+        substring = cleaned_text[i:i+12]
+        if is_license_plate(substring):
+            print(f" => Detected License Plate Text: {substring}")
+            return
+    print(" => Not a license plate", text)
 
-    # Kiểm tra xem kết quả có dữ liệu không
-    if results['results']:
-        # Lấy biển số xe từ kết quả nhận dạng
-        plate_number = results['results'][0]['plate']
-        print("Plate number:", plate_number)
-        return plate_number
-    else:
-        return "No plate number found"
+def detection_license_plate(image_file):
+    try:
+        # Đọc tệp ảnh từ request
+        image_bytes = image_file.read()
+        image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+        image_np = np.array(image)
+        
+        # Sử dụng EasyOCR để đọc văn bản từ ảnh
+        result = reader.readtext(image_np)
+        text = " ".join([res[1] for res in result])
+        response = process_text(text)
+        
+        return {"result": response}
+    except Exception as e:
+        return {"error": str(e)}
+    
