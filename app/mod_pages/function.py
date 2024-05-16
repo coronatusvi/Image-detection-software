@@ -7,7 +7,7 @@ import numpy as np
 reader = easyocr.Reader(['en'])
 
 def is_license_plate(text):
-    pattern = r'\b\d{2}-[A-Z]{1}\d{1}\d{3}[\.\-]?\d{2}\b'
+    pattern = r'\b\d{2}-?[A-Z][A-Z\d](\d{3}\.\d{2}|\d{4})\b'
     return bool(re.search(pattern, text))
 
 def process_text(text):
@@ -17,9 +17,8 @@ def process_text(text):
     for i in range(len(cleaned_text) - 1):
         substring = cleaned_text[i:i+12]
         if is_license_plate(substring):
-            print(f" => Detected License Plate Text: {substring}")
-            return
-    print(" => Not a license plate", text)
+            return substring
+        return ""
 
 def detection_license_plate(image_file):
     try:
@@ -33,7 +32,7 @@ def detection_license_plate(image_file):
         text = " ".join([res[1] for res in result])
         response = process_text(text)
         
-        return {"result": response}
+        return response
     except Exception as e:
-        return {"error": str(e)}
+        return ""
     
