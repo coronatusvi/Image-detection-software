@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import easyocr
 # from PIL import Image
 from app.mod_pages.function import detection_license_plate
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -27,14 +28,12 @@ def ocr():
 @app.route('/scan-license-plate', methods=['POST'])
 def scan_license_plate():
     if 'fileImage' not in request.files:
-        return jsonify({"error": "No image provided"}), 400
-    # Lấy đường dẫn của tệp tin
-    image_file = request.files['fileImage']
-    
-    # Lấy đường dẫn của tệp tin
-    file_path = image_file.filename
+        return 'No file part in the request.'
+    file = request.files['fileImage']
+    filename = secure_filename(file.filename)
+    file.save(filename)
 
-    result = detection_license_plate(image_file)
-    if result == "": 
-        return jsonify({"result": "Không nhận dạng được ảnh " + file_path})
-    return jsonify({"result": result})
+    result = detection_license_plate(filename)
+    if not result: 
+        return jsonify({"data": "Không nhận dạng được ảnh " + filename})
+    return jsonify({"data": list(result)}) 

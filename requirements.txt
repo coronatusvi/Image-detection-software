@@ -1,7 +1,11 @@
-Flask==2.0.3
-tensorflow==1.14.0
-numpy==1.19.5
-# matplotlib==3.3.4
-requests==2.21.0
-openalpr==1.1.0
-easyocr==1.7.1
+opencv-python
+matplotlib
+numpy
+Pillow
+torch
+torchvision
+tqdm
+pyyaml
+requests
+pandas
+seaborn
