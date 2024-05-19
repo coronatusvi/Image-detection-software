@@ -29,8 +29,7 @@ def detection_license_plate(filename):
                 h = int(plate[3] - plate[1])  # ymax - ymin
                 crop_img = img[y:y+h, x:x+w]
                 cv2.rectangle(img, (int(plate[0]), int(plate[1])), (int(plate[2]), int(plate[3])), color=(0, 0, 225), thickness=2)
-                cv2.imwrite("crop.jpg", crop_img)
-                rc_image = cv2.imread("crop.jpg")
+                # cv2.imwrite("crop.jpg", crop_img)
                 lp = ""
 
                 for cc in range(0, 2):
