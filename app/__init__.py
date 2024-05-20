@@ -12,19 +12,19 @@ CORS(app)
 def hello():
     return 'Hello, World!'
 
-reader = easyocr.Reader(['en'])     
-@app.route('/ocr', methods=['POST'])
-def ocr():
-    if 'fileImage' not in request.files:
-        return jsonify({"error": "No image provided"}), 400
-    # Lấy đường dẫn của tệp tin
-    image_file = request.files['fileImage']
+# reader = easyocr.Reader(['en'])     
+# @app.route('/ocr', methods=['POST'])
+# def ocr():
+#     if 'fileImage' not in request.files:
+#         return jsonify({"error": "No image provided"}), 400
+#     # Lấy đường dẫn của tệp tin
+#     image_file = request.files['fileImage']
 
-    image_bytes = image_file.read()
+#     image_bytes = image_file.read()
 
-    result = reader.readtext(image_bytes)
-    text = " ".join([res[1] for res in result])
-    return jsonify({"text": text})
+#     result = reader.readtext(image_bytes)
+#     text = " ".join([res[1] for res in result])
+#     return jsonify({"text": text})
 
 
 @app.route('/scan-license-plate', methods=['POST'])
