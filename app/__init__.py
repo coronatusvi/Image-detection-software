@@ -24,7 +24,7 @@ def ocr():
 
     result = reader.readtext(image_bytes)
     text = " ".join([res[1] for res in result])
-    return jsonify({"text": text})
+    return jsonify({"data": list(text)})
 
 
 @app.route('/scan-license-plate', methods=['POST'])
