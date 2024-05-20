@@ -7,6 +7,14 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+@app.after_request
+def after_request(response):
+    # Ghi log request
+    app.logger.info(f'Request method: {request.method}')
+    app.logger.info(f'Request URL: {request.url}')
+    app.logger.info(f'Request data: {request.get_data()}')
+    app.logger.info(f'Response status: {response.status}')
+    return response
 
 @app.route('/')
 def hello():
