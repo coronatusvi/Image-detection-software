@@ -12,9 +12,9 @@ CORS(app)
 def hello():
     return 'Hello, World!'
 
+reader = easyocr.Reader(['en'])     
 @app.route('/ocr', methods=['POST'])
 def ocr():
-    reader = easyocr.Reader(['en'])     
     if 'fileImage' not in request.files:
         return jsonify({"error": "No image provided"}), 400
     # Lấy đường dẫn của tệp tin
