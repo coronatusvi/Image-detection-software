@@ -29,12 +29,12 @@ def ocr():
 @app.route('/scan-license-plate', methods=['POST'])
 def scan_license_plate():
     if 'fileImage' not in request.files:
-        return 'No file part in the request.'
+        return jsonify({"error": "No image provided"}), 400
     file = request.files['fileImage']
     filename = secure_filename(file.filename)
     file.save(filename)
 
     result = detection_license_plate(filename)
     if not result: 
-        return jsonify({"data": "Không nhận dạng được ảnh " + filename})
+        return jsonify({"data": ["Không nhận dạng được ảnh " + filename]})
     return jsonify({"data": list(result)}) 
