@@ -36,5 +36,5 @@ def scan_license_plate():
 
     result = ""
     if not result: 
-        return jsonify({"data": ["Model hiện tại không hoạt động"]})
+        return jsonify({"data": ["System not working!"]})
     return jsonify({"data": list(result)}) 
