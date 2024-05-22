@@ -34,7 +34,7 @@ def scan_license_plate():
     filename = secure_filename(file.filename)
     file.save(filename)
 
-    result = detection_license_plate(filename)
+    result = ""
     if not result: 
-        return jsonify({"data": ["Không nhận dạng được ảnh!"]})
+        return jsonify({"data": ["Model hiện tại không hoạt động"]})
     return jsonify({"data": list(result)}) 
