@@ -34,7 +34,7 @@ def scan_license_plate():
     filename = secure_filename(file.filename)
     file.save(filename)
 
-    result = ""
-    if not result: 
-        return jsonify({"data": ["System not working!"]})
-    return jsonify({"data": list(result)}) 
+    # result = ""
+    # if not result: 
+        # return jsonify({"data": ["System not working!"]})
+    return jsonify({"data": ["System not working!"]}) 
