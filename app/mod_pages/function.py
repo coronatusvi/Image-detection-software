@@ -70,10 +70,10 @@ def extract_serial_text(image_bytes_list):
         response = request.post(API_URL, json=payload, headers=headers)
         error = data.get("ocrResult", {}).get("ErrorDetails", "")
         if error != "":
-            return {"errorMessage": error}, 400
+            return {"errorMessage": error}
         
         data = response.json()
         text = data.get("text", {}).get("ParsedText", "")
         combined_text.append(text)
 
-    return { "errorMessage":"", "data": " ".join(combined_text)},200
+    return {"data": " ".join(combined_text)}
