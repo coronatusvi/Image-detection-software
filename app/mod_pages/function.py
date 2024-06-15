@@ -3,7 +3,10 @@ import cv2
 import torch
 import function.utils_rotate as utils_rotate
 import function.helper as helper
+import base64
+from flask import request
 
+# Detection license plate
 def detection_license_plate(filename):
     # Your image detection code here
     yolo_LP_detect = torch.hub.load('yolov5', 'custom', path='model/LP_detector.pt', force_reload=True, source='local')
@@ -47,3 +50,30 @@ def detection_license_plate(filename):
 
     # Return the result as text
     return list_read_plates
+
+
+API_URL = "https://imagetext.io/api/extract-text"
+
+def extract_serial_text(image_bytes_list):
+    combined_text = []
+    headers = {
+        "Content-Type": "application/json"
+    }
+    
+    for image_bytes in image_bytes_list:
+        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
+        payload = {
+            "locale": "eng",
+            "imageBase64": image_base64
+        }
+
+        response = request.post(API_URL, json=payload, headers=headers)
+        error = data.get("ocrResult", {}).get("ErrorDetails", "")
+        if error != "":
+            return {"errorMessage": error}, 400
+        
+        data = response.json()
+        text = data.get("text", {}).get("ParsedText", "")
+        combined_text.append(text)
+
+    return { "errorMessage":"", "data": " ".join(combined_text)},200

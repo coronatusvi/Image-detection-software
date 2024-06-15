@@ -11,4 +11,3 @@ pandas
 seaborn
 flask_cors
 flask
-easyocr

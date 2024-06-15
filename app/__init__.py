@@ -1,30 +1,32 @@
 from flask import Flask, request, jsonify
-import easyocr
 # from PIL import Image
 from app.mod_pages.function import detection_license_plate
+from app.mod_pages.function import extract_serial_text
 from werkzeug.utils import secure_filename
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 
 @app.route('/')
 def hello():
     return 'Hello, World!'
 
-reader = easyocr.Reader(['en'])     
-@app.route('/ocr', methods=['POST'])
-def ocr():
+@app.route('/image-to-serial-check', methods=['POST'])
+def image_to_serial_check():
     if 'fileImage' not in request.files:
         return jsonify({"error": "No image provided"}), 400
-    # Lấy đường dẫn của tệp tin
-    image_file = request.files['fileImage']
 
-    image_bytes = image_file.read()
+    # Lấy các tệp ảnh từ yêu cầu
+    image_files = request.files.getlist('fileImage')
+    if not image_files:
+        return jsonify({"error": "No images provided"}), 400
 
-    result = reader.readtext(image_bytes)
-    text = " ".join([res[1] for res in result])
-    return jsonify({"data": [text]})
+    image_bytes_list = [image.read() for image in image_files]
+    result = extract_serial_text(image_bytes_list)
+
+    if "error" in result:
+        return jsonify(result), result[1]
+    else:
+        return jsonify(result)
 
 @app.route('/scan-license-plate', methods=['POST'])
 def scan_license_plate():
@@ -36,5 +38,5 @@ def scan_license_plate():
 
     result = detection_license_plate(filename)
     if not result: 
-        return jsonify({"data": ["Không nhận dạng được ảnh!"]})
-    return jsonify({"data": list(result)}) 
+        return jsonify({"errorMessage": "Không nhận dạng được ảnh!"}), 400
+    return jsonify({"errorMessage":"", "data": list(result)}), 200
