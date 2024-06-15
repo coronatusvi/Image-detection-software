@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from app.mod_pages.function import detection_license_plate
 from app.mod_pages.function import extract_serial_text
 from werkzeug.utils import secure_filename
-
+import base64
 app = Flask(__name__)
 
 @app.route('/')
@@ -18,12 +18,21 @@ def image_to_serial_check():
     # Lấy các tệp ảnh từ yêu cầu
     image_files = request.files.getlist('fileImage')
     # Lấy danh sách tên file từ image_files
-    file_names = [file.filename for file in image_files]
+    base64_files = []
+    for file in image_files:
+        file_name = file.filename
+        file_content = file.read()
+        base64_content = base64.b64encode(file_content).decode('utf-8')
+        base64_files.append({
+            "fileName": file_name,
+            "base64Content": base64_content
+        })
 
-    return jsonify({"fileNames": file_names}), 200
+    return jsonify({"base64Files": base64_files}), 200
+
     if not image_files:
         return jsonify({"errorMessage": "No images provided"}), 400
-
+    
     image_bytes_list = [image.read() for image in image_files]
     result = extract_serial_text(image_bytes_list)
 
