@@ -17,7 +17,10 @@ def image_to_serial_check():
 
     # Lấy các tệp ảnh từ yêu cầu
     image_files = request.files.getlist('fileImage')
-    return jsonify(image_files)
+    # Lấy danh sách tên file từ image_files
+    file_names = [file.filename for file in image_files]
+
+    return jsonify({"fileNames": file_names}), 200
     if not image_files:
         return jsonify({"errorMessage": "No images provided"}), 400
 
