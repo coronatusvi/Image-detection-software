@@ -51,5 +51,14 @@ def scan_license_plate():
 
     result = detection_license_plate(filename)
     if not result: 
-        return jsonify({"errorMessage": "Không nhận dạng được ảnh!"}), 400
-    return jsonify({"errorMessage":"", "data": list(result)}), 200
+        return jsonify(
+            {
+                "errorMessage": "Không nhận dạng được ảnh!",
+                "data": list("")
+                }
+            ), 400
+    return jsonify(
+        {"errorMessage":"",
+          "data": list(result)
+          }
+        ), 200
