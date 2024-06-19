@@ -15,19 +15,17 @@ def image_to_serial_check():
     if 'fileImage' not in request.files:
         return jsonify({"errorMessage": "No image provided"}), 400
 
-    # Lấy các tệp ảnh từ yêu cầu
     image_files = request.files.getlist('fileImage')
-    # Lấy danh sách tên file từ image_files
 
     if not image_files:
         return jsonify({"errorMessage": "No images provided"}), 400
-    
+
     result = extract_serial_text(image_files)
 
-    if "errorMessage" in result:
-        return jsonify({"errorMessage":result.get("errorMessage")}), 400
+    if result.get("errorMessage"):
+        return jsonify({"errorMessage": result.get("errorMessage")}), 400
     else:
-        return jsonify({"data": list(result)}), 200
+        return jsonify({"data": result.get("data")}), 200
 
 @app.route('/scan-license-plate', methods=['POST'])
 def scan_license_plate():

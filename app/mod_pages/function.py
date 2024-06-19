@@ -77,4 +77,4 @@ def extract_serial_text(image_files):
         text = data.get("text", {}).get("ParsedText", "")
         combined_text += text
 
-    return combined_text
+    return {"errorMessage":"", "data":combined_text}
