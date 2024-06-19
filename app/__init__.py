@@ -10,6 +10,7 @@ app = Flask(__name__)
 def hello():
     return 'Hello, World!'
 
+@app.route('/image-to-serial-check', methods=['POST'])
 def image_to_serial_check():
     if 'fileImage' not in request.files:
         return jsonify({"errorMessage": "No image provided"}), 400
