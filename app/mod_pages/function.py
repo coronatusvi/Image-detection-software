@@ -54,17 +54,18 @@ def detection_license_plate(filename):
 
 API_URL = "https://imagetext.io/api/extract-text"
 
-def extract_serial_text(image_bytes_list):
-    combined_text = []
+def extract_serial_text(image_files):
+    combined_text = ""
     headers = {
         "Content-Type": "application/json"
     }
-    
-    for image_bytes in image_bytes_list:
-        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
+
+    for file in image_files:
+        file_content = file.read()
+        base64_content = base64.b64encode(file_content).decode('utf-8')
         payload = {
             "locale": "eng",
-            "imageBase64": image_base64
+            "imageBase64": base64_content
         }
 
         response = request.post(API_URL, json=payload, headers=headers)
@@ -74,6 +75,6 @@ def extract_serial_text(image_bytes_list):
         
         data = response.json()
         text = data.get("text", {}).get("ParsedText", "")
-        combined_text.append(text)
+        combined_text += text
 
-    return {"data": " ".join(combined_text)}
+    return combined_text
