@@ -4,7 +4,7 @@ import torch
 import function.utils_rotate as utils_rotate
 import function.helper as helper
 import base64
-from flask import request
+import requests
 
 # Detection license plate
 def detection_license_plate(filename):
@@ -68,13 +68,16 @@ def extract_serial_text(image_files):
             "imageBase64": base64_content
         }
 
-        response = request.post(API_URL, json=payload, headers=headers)
-        error = data.get("ocrResult", {}).get("ErrorDetails", "")
-        if error != "":
-            return {"errorMessage": error}
-        
+        response = requests.post(API_URL, json=payload, headers=headers)
+        if response.status_code != 200:
+            return {"errorMessage": "Error in OCR request"}
+
         data = response.json()
+        error = data.get("ocrResult", {}).get("ErrorDetails", "")
+        if error:
+            return {"errorMessage": error}
+
         text = data.get("text", {}).get("ParsedText", "")
         combined_text += text
 
-    return {"errorMessage":"", "data":combined_text}
+    return {"errorMessage": "", "data": combined_text}
