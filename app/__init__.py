@@ -4,7 +4,7 @@ from app.mod_pages.function import detection_license_plate
 from app.mod_pages.function import extract_serial_text
 from werkzeug.utils import secure_filename
 import base64
-from flask_cors import CORS
+# from flask_cors import CORS
 app = Flask(__name__)
 # CORS(app)
 
