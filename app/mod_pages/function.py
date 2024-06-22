@@ -52,7 +52,7 @@ def detection_license_plate(filename):
     # Return the result as text
     return list_read_plates
 
-os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata'  # Adjust the path if necessary
+os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/5/tessdata'  # Adjust the path if necessary
 
 def detect_text_tesseract(image_files):
     textReturn = ""
