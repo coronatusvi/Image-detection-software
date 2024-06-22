@@ -3,8 +3,9 @@ import cv2
 import torch
 import function.utils_rotate as utils_rotate
 import function.helper as helper
-import base64
-import requests
+import os
+import pytesseract
+from PIL import Image
 
 # Detection license plate
 def detection_license_plate(filename):
@@ -51,33 +52,22 @@ def detection_license_plate(filename):
     # Return the result as text
     return list_read_plates
 
+os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata'  # Adjust the path if necessary
 
-API_URL = "https://imagetext.io/api/extract-text"
-
-def extract_serial_text(image_files):
-    combined_text = ""
-    headers = {
-        "Content-Type": "application/json"
-    }
-
+def detect_text_tesseract(image_files):
+    textReturn = ""
     for file in image_files:
-        file_content = file.read()
-        base64_content = base64.b64encode(file_content).decode('utf-8')
-        payload = {
-            "locale": "eng",
-            "imageBase64": base64_content
-        }
+        image = Image.open(file)
+        text = pytesseract.image_to_string(image)  # Thay 'vie' bằng mã ngôn ngữ của bạn nếu cần
+        textReturn += text
+    # Xoá hết các khoảng trắng chứa 2 space trở lên
+    textReturn = " ".join(textReturn.split()) 
+    return textReturn
 
-        response = requests.post(API_URL, json=payload, headers=headers)
-        if response.status_code != 200:
-            return {"errorMessage": "Error in OCR request"}
-
-        data = response.json()
-        error = data.get("ocrResult", {}).get("ErrorDetails", "")
-        if error:
-            return {"errorMessage": error}
-
-        text = data.get("text", {}).get("ParsedText", "")
-        combined_text += text
-
-    return {"errorMessage": "", "data": combined_text}
+def count_service_codes(text, service_codes, checked):
+    counts = {}
+    for code in service_codes:
+        counts[code] = text.count(code)
+    for code in checked:
+        counts[code] = text.count(code)
+    return counts
