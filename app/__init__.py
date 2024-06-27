@@ -52,11 +52,11 @@ def image_to_serial_check():
             resultText = detect_text_tesseract([file_path])
             file_paths.append({"id": index, "serialNo":serial_list[index], "path": f"{file_path}", "textInImage": resultText})
             # Count the number of service codes in image
-            # count = count_service_code(resultText, serial_list[index], checked)
-            # data.append({"id": index, "serial": serial_list[index], "count": count})
+            count = count_service_code(resultText, serial_list[index], checked)
+            data.append({"count": count, "serial": serial_list[index], "id": index})
             
             index = index + 1
-        return jsonify({"errorMessage": "", "filePaths": file_paths, "serialList": serial_list}), 200
+        return jsonify({"errorMessage": "", "data":data, "filePaths": file_paths, "serialList": serial_list}), 200
     except Exception as e:
         return jsonify({"errorMessage": str(e), "data": None}), 500
 
