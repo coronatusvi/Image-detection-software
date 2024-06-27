@@ -52,7 +52,7 @@ def detection_license_plate(filename):
     # Return the result as text
     return list_read_plates
 
-os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/5/tessdata'  # Adjust the path if necessary
+os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata'  # Adjust the path if necessary
 
 def detect_text_tesseract(image_files):
     textReturn = ""
@@ -64,10 +64,22 @@ def detect_text_tesseract(image_files):
     textReturn = " ".join(textReturn.split()) 
     return textReturn
 
-def count_service_codes(text, service_codes, checked):
+def count_service_codes_check_multi(text, service_codes, checked):
     counts = {}
     for code in service_codes:
         counts[code] = text.count(code)
     for code in checked:
         counts[code] = text.count(code)
     return counts
+
+def count_service_code(text, service_code, checked):
+    counts = 1
+    if checked in text:
+        if service_code in text:
+            count = 1 # If 'SERVICE CODE' is exist and service_code is exist => set count to 1
+        else :
+            count = 0
+    else:
+        # If 'SERVICE CODE' is not found, set counts for all service_codes to 0        
+        count = 0
+    return count

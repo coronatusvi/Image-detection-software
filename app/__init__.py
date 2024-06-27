@@ -2,9 +2,10 @@ from flask import Flask, request, jsonify
 # from PIL import Image
 from app.mod_pages.function import detection_license_plate
 from app.mod_pages.function import detect_text_tesseract
-from app.mod_pages.function import count_service_codes
+from app.mod_pages.function import count_service_code
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
+import os
 app = Flask(__name__)
 CORS(app)
 
@@ -18,22 +19,46 @@ def image_to_serial_check():
         return jsonify({"errorMessage": "No image provided", "data": None}), 400
 
     image_files = request.files.getlist('fileImage')
+    serial_list = request.form.getlist('serialList')
 
-    if not image_files:
+    if not image_files: 
+        # Check if the images are provided
         return jsonify({"errorMessage": "No images provided", "data": None}), 400
+    if not serial_list: 
+        # Check if the serial list is provided
+        return jsonify({"errorMessage": "No serial list provided", "data": None}), 400
+    if len(image_files) != len(serial_list): 
+        # Check if the number of images and serials match
+        return jsonify({"errorMessage": "Number of images and serials do not match", "data": None}), 400
 
-    if 'serviceCodes' not in request.form:
-        return jsonify({"errorMessage": "No service codes provided", "data": None}), 400
-
-    service_codes = request.form.getlist('serviceCodes')
-    checked = ["SERVICE CODE"]
+    file_paths = []
+    data = []
+    checked = "SERVICE CODE"
+    resultTextFinal = ""
 
     try:
-        text = detect_text_tesseract(image_files)
-        counts = count_service_codes(text, service_codes, checked)
-        return jsonify({"errorMessage": "", "data": counts}), 200
+        # Ensure the directory exists
+        input_dir = './images/inputs'
+        if not os.path.exists(input_dir):
+            os.makedirs(input_dir)
+
+        index = 0
+        for file in image_files:
+            # Save the file to the input directory
+            file_path = os.path.join(input_dir, file.filename)
+            file.save(file_path)
+
+            # Detect text in the image
+            resultText = detect_text_tesseract([file_path])
+            file_paths.append({"id": index, "serialNo":serial_list[index], "path": f"{file_path}", "textInImage": resultText})
+            # Count the number of service codes in image
+            # count = count_service_code(resultText, serial_list[index], checked)
+            # data.append({"id": index, "serial": serial_list[index], "count": count})
+            
+            index = index + 1
+        return jsonify({"errorMessage": "", "filePaths": file_paths, "serialList": serial_list}), 200
     except Exception as e:
-        return jsonify({"errorMessage": str(e), "data": None}), 400
+        return jsonify({"errorMessage": str(e), "data": None}), 500
 
 @app.route('/scan-license-plate', methods=['POST'])
 def scan_license_plate():
