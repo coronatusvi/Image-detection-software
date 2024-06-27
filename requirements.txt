@@ -11,4 +11,4 @@ pandas
 seaborn
 flask_cors
 flask
-pytesseract
+python-dotenv

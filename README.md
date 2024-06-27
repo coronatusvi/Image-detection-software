@@ -34,3 +34,8 @@ Use code in ./training folder
   training/Plate_detection.ipynb     #for LP_Detection
   training/Letter_detection.ipynb    #for Letter_detection
 ```
+```
+  pip install pytesseract
+  !sudo apt-get install tesseract-ocr
+  !tesseract --version
+```

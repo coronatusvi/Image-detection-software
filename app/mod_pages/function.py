@@ -6,6 +6,7 @@ import function.helper as helper
 import os
 import pytesseract
 from PIL import Image
+from dotenv import load_dotenv
 
 # Detection license plate
 def detection_license_plate(filename):
@@ -52,7 +53,12 @@ def detection_license_plate(filename):
     # Return the result as text
     return list_read_plates
 
-os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata'  # Adjust the path if necessary
+# Load environment variables from .env file
+load_dotenv()
+# Set the TESSDATA_PREFIX environment variable from .env
+tessdata_prefix = os.getenv('TESSDATA_PREFIX')
+if tessdata_prefix:
+    os.environ['TESSDATA_PREFIX'] = tessdata_prefix
 
 def detect_text_tesseract(image_files):
     textReturn = ""
