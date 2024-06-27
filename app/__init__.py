@@ -57,8 +57,18 @@ def image_to_serial_check():
             
             index = index + 1
         return jsonify({"errorMessage": "", "data":data, "filePaths": file_paths, "serialList": serial_list}), 200
+    
     except Exception as e:
         return jsonify({"errorMessage": str(e), "data": None}), 500
+
+    finally:
+        # Cleanup: Delete all files in the input directory
+        for file in os.listdir(input_dir):
+            file_path = os.path.join(input_dir, file)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+        # Optional: Remove the directory itself if you want
+        # shutil.rmtree(input_dir)
 
 @app.route('/scan-license-plate', methods=['POST'])
 def scan_license_plate():
