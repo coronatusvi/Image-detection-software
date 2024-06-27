@@ -3,8 +3,10 @@ import cv2
 import torch
 import function.utils_rotate as utils_rotate
 import function.helper as helper
-import base64
-from flask import request
+import os
+import pytesseract
+from PIL import Image
+from dotenv import load_dotenv
 
 # Detection license plate
 def detection_license_plate(filename):
@@ -51,29 +53,39 @@ def detection_license_plate(filename):
     # Return the result as text
     return list_read_plates
 
+# Load environment variables from .env file
+load_dotenv()
+# Set the TESSDATA_PREFIX environment variable from .env
+tessdata_prefix = os.getenv('TESSDATA_PREFIX')
+if tessdata_prefix:
+    os.environ['TESSDATA_PREFIX'] = tessdata_prefix
 
-API_URL = "https://imagetext.io/api/extract-text"
+def detect_text_tesseract(image_files):
+    textReturn = ""
+    for file in image_files:
+        image = Image.open(file)
+        text = pytesseract.image_to_string(image)  # Thay 'vie' bằng mã ngôn ngữ của bạn nếu cần
+        textReturn += text
+    # Xoá hết các khoảng trắng chứa 2 space trở lên
+    textReturn = " ".join(textReturn.split()) 
+    return textReturn
 
-def extract_serial_text(image_bytes_list):
-    combined_text = []
-    headers = {
-        "Content-Type": "application/json"
-    }
-    
-    for image_bytes in image_bytes_list:
-        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
-        payload = {
-            "locale": "eng",
-            "imageBase64": image_base64
-        }
+def count_service_codes_check_multi(text, service_codes, checked):
+    counts = {}
+    for code in service_codes:
+        counts[code] = text.count(code)
+    for code in checked:
+        counts[code] = text.count(code)
+    return counts
 
-        response = request.post(API_URL, json=payload, headers=headers)
-        error = data.get("ocrResult", {}).get("ErrorDetails", "")
-        if error != "":
-            return {"errorMessage": error}
-        
-        data = response.json()
-        text = data.get("text", {}).get("ParsedText", "")
-        combined_text.append(text)
-
-    return {"data": " ".join(combined_text)}
+def count_service_code(text, service_code, checked):
+    counts = 1
+    if checked in text:
+        if service_code in text:
+            count = 1 # If 'SERVICE CODE' is exist and service_code is exist => set count to 1
+        else :
+            count = 0
+    else:
+        # If 'SERVICE CODE' is not found, set counts for all service_codes to 0        
+        count = 0
+    return count
