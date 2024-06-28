@@ -64,8 +64,8 @@ def detect_text_tesseract(image_files):
     textReturn = ""
     for file in image_files:
         image = Image.open(file)
-        text = pytesseract.image_to_string(image)  # Thay 'vie' bằng mã ngôn ngữ của bạn nếu cần
-        textReturn += text
+        # text = pytesseract.image_to_string(image)  # Thay 'vie' bằng mã ngôn ngữ của bạn nếu cần
+        textReturn += tessdata_prefix
     # Xoá hết các khoảng trắng chứa 2 space trở lên
     textReturn = " ".join(textReturn.split()) 
     return textReturn
@@ -79,7 +79,6 @@ def count_service_codes_check_multi(text, service_codes, checked):
     return counts
 
 def count_service_code(text, service_code, checked):
-    counts = 1
     if checked in text:
         if service_code in text:
             count = 1 # If 'SERVICE CODE' is exist and service_code is exist => set count to 1
