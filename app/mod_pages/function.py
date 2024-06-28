@@ -64,8 +64,8 @@ def detect_text_tesseract(image_files):
     textReturn = ""
     for file in image_files:
         image = Image.open(file)
-        # text = pytesseract.image_to_string(image)  # Thay 'vie' bằng mã ngôn ngữ của bạn nếu cần
-        textReturn += tessdata_prefix
+        text = pytesseract.image_to_string(image)  # Thay 'vie' bằng mã ngôn ngữ của bạn nếu cần
+        textReturn += text
     # Xoá hết các khoảng trắng chứa 2 space trở lên
     textReturn = " ".join(textReturn.split()) 
     return textReturn
