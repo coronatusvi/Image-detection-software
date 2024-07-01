@@ -55,10 +55,20 @@ def detection_license_plate(filename):
 
 # Load environment variables from .env file
 load_dotenv()
-# Set the TESSDATA_PREFIX environment variable from .env
+
+# Lấy giá trị của TESSDATA_PREFIX từ các biến môi trường
 tessdata_prefix = os.getenv('TESSDATA_PREFIX')
+
+# Debug: Hiển thị giá trị của tessdata_prefix trước khi kiểm tra
+print(f'TESSDATA_PREFIX from getenv: {tessdata_prefix}')
+
 if tessdata_prefix:
     os.environ['TESSDATA_PREFIX'] = tessdata_prefix
+    # Debug: Hiển thị giá trị của TESSDATA_PREFIX trong os.environ sau khi gán
+    print(f'TESSDATA_PREFIX in os.environ: {os.environ["TESSDATA_PREFIX"]}')
+else:
+    print('TESSDATA_PREFIX is not set in the environment variables.')
+
 
 def detect_text_tesseract(image_files):
     textReturn = ""
