@@ -58,7 +58,7 @@ load_dotenv()
 # Set the TESSDATA_PREFIX environment variable from .env
 tessdata_prefix = os.getenv('TESSDATA_PREFIX')
 if tessdata_prefix:
-    os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/5/tessdata'
+    os.environ['TESSDATA_PREFIX'] = "/usr/share/tesseract-ocr/4.00/tessdata"
 
 def detect_text_tesseract(image_files):
     textReturn = ""
