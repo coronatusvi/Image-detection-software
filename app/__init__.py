@@ -12,6 +12,7 @@ import pytesseract
 app = Flask(__name__)
 CORS(app)
 
+os.environ['TESSDATA_PREFIX'] = "/usr/share/tesseract-ocr/5/tessdata"
 @app.route('/')
 def hello():
     return 'Hello, World!'
