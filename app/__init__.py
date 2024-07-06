@@ -6,13 +6,39 @@ from app.mod_pages.function import count_service_code
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import os
+from PIL import Image
+import pytesseract
+
 app = Flask(__name__)
 CORS(app)
 
+os.environ['TESSDATA_PREFIX'] = "/usr/share/tesseract-ocr/5/tessdata"
 @app.route('/')
 def hello():
     return 'Hello, World!'
 
+@app.route('/curl-image-to-serial-check', methods=['POST'])
+def image_to_serial_check():
+    try:
+        file_path = "/home/dev/flask/Flask-Scan-License-Plate/images/370301498CE.jpg"
+
+        if not os.path.exists(file_path):
+            return jsonify({"errorMessage": "File not found", "data": None}), 404
+
+        # Detect text in the image
+        image = Image.open(file_path)
+        result_text = pytesseract.image_to_string(image)
+
+        return jsonify({
+            "errorMessage": "",
+            "data": {
+                "textInImage": result_text
+            }
+        }), 200
+
+    except Exception as e:
+        return jsonify({"errorMessage": str(e), "data": None}), 500
+    
 @app.route('/image-to-serial-check', methods=['POST'])
 def image_to_serial_check():
     if 'fileImage' not in request.files:
