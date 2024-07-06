@@ -18,7 +18,7 @@ def hello():
     return 'Hello, World!'
 
 @app.route('/curl-image-to-serial-check', methods=['POST'])
-def image_to_serial_check():
+def curl_image_to_serial_check():
     try:
         file_path = "/home/dev/flask/Flask-Scan-License-Plate/images/370301498CE.jpg"
 
