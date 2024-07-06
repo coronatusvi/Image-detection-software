@@ -12,20 +12,20 @@ import pytesseract
 app = Flask(__name__)
 CORS(app)
 
-os.environ['TESSDATA_PREFIX'] = "/usr/share/tesseract-ocr/5/tessdata"
 @app.route('/')
 def hello():
     return 'Hello, World!'
 
+# Thiết lập biến môi trường TESSDATA_PREFIX
+os.environ['TESSDATA_PREFIX'] = "/usr/share/tesseract-ocr/5/tessdata"
+
 @app.route('/curl-image-to-serial-check', methods=['POST'])
 def curl_image_to_serial_check():
     try:
+        # Đường dẫn đến file ảnh trên server
         file_path = "/home/dev/flask/Flask-Scan-License-Plate/images/370301498CE.jpg"
 
-        if not os.path.exists(file_path):
-            return jsonify({"errorMessage": "File not found", "data": None}), 404
-
-        # Detect text in the image
+        # Mở và nhận diện văn bản trong ảnh
         image = Image.open(file_path)
         result_text = pytesseract.image_to_string(image)
 
@@ -37,8 +37,11 @@ def curl_image_to_serial_check():
         }), 200
 
     except Exception as e:
-        return jsonify({"errorMessage": str(e), "data": None}), 500
-    
+        return jsonify({
+            "errorMessage": str(e),
+            "data": None
+        }), 500
+        
 @app.route('/image-to-serial-check', methods=['POST'])
 def image_to_serial_check():
     if 'fileImage' not in request.files:
