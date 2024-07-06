@@ -6,8 +6,6 @@ from app.mod_pages.function import count_service_code
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import os
-from PIL import Image
-import pytesseract
 
 app = Flask(__name__)
 CORS(app)
@@ -16,32 +14,6 @@ CORS(app)
 def hello():
     return 'Hello, World!'
 
-# Thiết lập biến môi trường TESSDATA_PREFIX
-os.environ['TESSDATA_PREFIX'] = "/usr/share/tesseract-ocr/5/tessdata"
-
-@app.route('/curl-image-to-serial-check', methods=['POST'])
-def curl_image_to_serial_check():
-    try:
-        # Đường dẫn đến file ảnh trên server
-        file_path = "/home/dev/flask/Flask-Scan-License-Plate/images/370301498CE.jpg"
-
-        # Mở và nhận diện văn bản trong ảnh
-        image = Image.open(file_path)
-        result_text = pytesseract.image_to_string(image)
-
-        return jsonify({
-            "errorMessage": "",
-            "data": {
-                "textInImage": result_text
-            }
-        }), 200
-
-    except Exception as e:
-        return jsonify({
-            "errorMessage": str(e),
-            "data": None
-        }), 500
-        
 @app.route('/image-to-serial-check', methods=['POST'])
 def image_to_serial_check():
     if 'fileImage' not in request.files:
