@@ -74,20 +74,20 @@ def image_to_serial_check():
 @app.route('/image-to-serial-check-detail', methods=['POST'])
 def image_to_serial_check_detail():
     if 'fileImage' not in request.files:
-        return jsonify({"errorMessage": "No image provided", "data": None}), 400
+        return jsonify({"errorMessage": "No image provided", "data": None}), 200
 
     image_files = request.files.getlist('fileImage')
     serial_list = request.form.getlist('serialList')
 
     if not image_files: 
         # Check if the images are provided
-        return jsonify({"errorMessage": "No images provided", "data": None}), 400
+        return jsonify({"errorMessage": "No images provided", "data": None}), 200
     if not serial_list: 
         # Check if the serial list is provided
-        return jsonify({"errorMessage": "No serial list provided", "data": None}), 400
+        return jsonify({"errorMessage": "No serial list provided", "data": None}), 200
     if len(image_files) != len(serial_list): 
         # Check if the number of images and serials match
-        return jsonify({"errorMessage": "Number of images and serials do not match", "data": None}), 400
+        return jsonify({"errorMessage": "Number of images and serials do not match", "data": None}), 200
 
     file_paths = []
     data = []
@@ -131,7 +131,7 @@ def image_to_serial_check_detail():
 @app.route('/scan-license-plate', methods=['POST'])
 def scan_license_plate():
     if 'fileImage' not in request.files:
-        return jsonify({"errorMessage": "No image provided"}), 400
+        return jsonify({"errorMessage": "No image provided"}), 200
     file = request.files['fileImage']
     filename = secure_filename(file.filename)
     file.save(filename)
@@ -143,7 +143,7 @@ def scan_license_plate():
                 "errorMessage": "Không nhận dạng được ảnh!",
                 "data": list("")
                 }
-            ), 400
+            ), 200
     return jsonify(
         {"errorMessage":"",
           "data": list(result)
