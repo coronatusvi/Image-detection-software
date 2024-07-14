@@ -74,8 +74,8 @@ def count_service_codes_check_multi(text, service_codes, checked):
     return counts
 
 def count_service_code(text, service_code, checked):
-    if checked in text:
-        if service_code in text:
+    if service_code in text:
+        if checked in text.split(service_code)[0]:
             count = 1 # If 'SERVICE CODE' is exist and service_code is exist => set count to 1
         else :
             count = 0
