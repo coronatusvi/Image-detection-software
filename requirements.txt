@@ -13,3 +13,8 @@ flask_cors
 flask
 python-dotenv
 pytesseract
+fastapi
+pydantic
+passlib
+python-jose
+uvicorn

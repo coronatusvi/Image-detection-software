@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <object-set>
+    <table path="main.authenticator">
+      <table path="main.users" name="virtual_foreign_key_name" from="id_user" to="id"/>
+    </table>
+    <table path="main.companies">
+      <table path="main.users" name="virtual_foreign_key_name" from="id" to="id_company"/>
+    </table>
+    <table path="main.users">
+      <table path="main.authenticator" name="virtual_foreign_key_name" from="id" to="id_user"/>
+    </table>
+  </object-set>
+</data>
