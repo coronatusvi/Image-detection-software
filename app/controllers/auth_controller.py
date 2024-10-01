@@ -14,6 +14,7 @@ from typing import Dict, Any, Literal
 SECRET_KEY = os.getenv("SECRET_KEY", "f92fba826e69b7f89ecb349a2f7b1df92fba826e69b7f89ecb349a2f7b1df")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+REFRESH_TOKEN_EXPIRE_DAYS = 7  # Ví dụ: 7 ngày
 
 # Tạo context để mã hóa mật khẩu
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -52,17 +53,34 @@ def authenticate_user(db: Session, email: str, password: str):
     if not user:
         return False
 
-    authenticator = get_authenticator(db, user.id)  # Lấy thông tin xác thực
+    authenticator = get_authenticator(db, user.id)
     if not authenticator or not verify_password(password, authenticator.password_hash):
         return False
-    
-    return user
+
+    # Cập nhật last_login và refresh_token
+    refresh_token = create_refresh_token({"sub": str(user.id)})
+    authenticator.refresh_token = refresh_token
+    authenticator.last_login = int(datetime.utcnow().timestamp())  # Unix timestamp
+    db.commit()  # Lưu thay đổi vào DB
+
+    return user, refresh_token
 
 def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
-    expire = datetime.utcnow() + (expires_delta if expires_delta else timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
-    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+def create_refresh_token(data: dict):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -78,7 +96,6 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         if user_id is None:
             raise credentials_exception
     except JWTError as e:
-        print("credentials_exception", e, str(e))
         raise credentials_exception
 
     db: Session = SessionLocal()
