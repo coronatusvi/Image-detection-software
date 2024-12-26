@@ -17,11 +17,11 @@ The core of the application consists of a convolutional neural network (CNN) for
 
 ## Images:
 
-[https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg
 
-[[![Sample Input](link_to_sample_input_image.png) *A sample input image with a license plate*](https://github.com/coronatusvi/Image-detection-software/blob/main/images/input.jpg?raw=true)](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg
 
-[![Sample Output](link_to_sample_output_image.png) *The detected license plate and recognized text output*](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png
 
 ## GitHub Repository:
 
@@ -55,11 +55,11 @@ Cốt lõi của ứng dụng bao gồm một mạng nơ-ron tích chập (CNN) 
 
 ## Hình ảnh:
 
-[https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg
 
-[[![Sample Input](link_to_sample_input_image.png) *A sample input image with a license plate*](https://github.com/coronatusvi/Image-detection-software/blob/main/images/input.jpg?raw=true)](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg
 
-[![Sample Output](link_to_sample_output_image.png) *The detected license plate and recognized text output*](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png
 
 ## Kho lưu trữ GitHub:
 
@@ -93,11 +93,11 @@ Tôi rất hào hứng được giới thiệu dự án này tại Computer Visi
 
 ## 图片：
 
-[https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg
 
-[[![Sample Input](link_to_sample_input_image.png) *A sample input image with a license plate*](https://github.com/coronatusvi/Image-detection-software/blob/main/images/input.jpg?raw=true)](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg
 
-[![Sample Output](link_to_sample_output_image.png) *The detected license plate and recognized text output*](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png)
+https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png
 
 ## GitHub 存储库：
 
