@@ -17,11 +17,11 @@ The core of the application consists of a convolutional neural network (CNN) for
 
 ## Images:
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg
+![Architecture Diagram](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)  *Example architecture diagram of the system*
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg
+![Sample Input](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg) *A sample input image with a license plate*
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png
+![Sample Output](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png) *The detected license plate and recognized text output*
 
 ## GitHub Repository:
 
@@ -55,11 +55,11 @@ Cốt lõi của ứng dụng bao gồm một mạng nơ-ron tích chập (CNN) 
 
 ## Hình ảnh:
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg
+![Sơ đồ Kiến trúc](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)  *Ví dụ về sơ đồ kiến trúc của hệ thống*
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg
+![Ảnh Đầu vào Mẫu](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg) *Một ảnh đầu vào mẫu có biển số xe*
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png
+![Ảnh Đầu ra Mẫu](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png) *Biển số xe được phát hiện và văn bản nhận dạng được xuất ra*
 
 ## Kho lưu trữ GitHub:
 
@@ -93,11 +93,11 @@ Tôi rất hào hứng được giới thiệu dự án này tại Computer Visi
 
 ## 图片：
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg
+![架构图](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)  *系统架构图示例*
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg
+![示例输入](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg) *带有车牌的示例输入图像*
 
-https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png
+![示例输出](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png) *检测到的车牌和识别的文本输出*
 
 ## GitHub 存储库：
 
