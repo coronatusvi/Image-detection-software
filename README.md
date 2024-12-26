@@ -1,4 +1,3 @@
-```markdown
 # Image-Detection-Software for Gara: A Real-Time Vietnamese License Plate Recognition System
 
 This project showcases a real-time image detection software designed for use in parking garages (gara), focusing on the accurate detection and recognition of Vietnamese license plates. Leveraging a combination of deep learning techniques with a Flask-based web application, the system provides a robust and efficient solution for automated vehicle entry and tracking.
@@ -17,26 +16,27 @@ The core of the application consists of a convolutional neural network (CNN) for
 
 ## Images:
 
-![Architecture Diagram](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)  *Example architecture diagram of the system*
-
-![Sample Input](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg) *A sample input image with a license plate*
-
-![Sample Output](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png) *The detected license plate and recognized text output*
-
-## GitHub Repository:
-
-[Link to your GitHub repository](https://github.com/coronatusvi/Image-detection-software)
-
-## Conclusion
-
-This project demonstrates the practical application of computer vision in a real-world scenario. This image-detection-software serves as a solution for automatic number plate recognition (ANPR), offering seamless entry for vehicles within parking garages and improved monitoring and tracking capabilities.
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/architecture.jpg?raw=true" width="600" alt="Example architecture diagram of the system"/>
+    <br/>*Example architecture diagram of the system*
+</div>
+<br/>
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/input.jpg?raw=true" width="600" alt="A sample input image with a license plate"/>
+    <br/>*A sample input image with a license plate*
+</div>
+<br/>
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/flow.png?raw=true" width="600" alt="The detected license plate and recognized text output"/>
+    <br/>*The detected license plate and recognized text output*
+</div>
 
 I'm excited to present this project at the Computer Vision Projects Expo 2024!
-```
 
-**Vietnamese Description:**
 
-```markdown
+
+# Vietnamese:
+
 # Phần mềm Nhận diện Hình ảnh cho Gara: Hệ thống Nhận dạng Biển số Xe Việt Nam Theo Thời Gian Thực
 
 Dự án này giới thiệu một phần mềm nhận diện hình ảnh thời gian thực được thiết kế để sử dụng trong các gara đậu xe, tập trung vào việc phát hiện và nhận dạng chính xác biển số xe Việt Nam. Sử dụng kết hợp các kỹ thuật học sâu với một ứng dụng web dựa trên Flask, hệ thống cung cấp một giải pháp mạnh mẽ và hiệu quả để tự động hóa việc vào và theo dõi xe.
@@ -55,26 +55,25 @@ Cốt lõi của ứng dụng bao gồm một mạng nơ-ron tích chập (CNN) 
 
 ## Hình ảnh:
 
-![Sơ đồ Kiến trúc](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)  *Ví dụ về sơ đồ kiến trúc của hệ thống*
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/architecture.jpg?raw=true" width="600" alt="Ví dụ về sơ đồ kiến trúc của hệ thống"/>
+    <br/>*Ví dụ về sơ đồ kiến trúc của hệ thống*
+</div>
+<br/>
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/input.jpg?raw=true" width="600" alt="Một ảnh đầu vào mẫu có biển số xe"/>
+    <br/>*Một ảnh đầu vào mẫu có biển số xe*
+</div>
+<br/>
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/flow.png?raw=true" width="600" alt="Biển số xe được phát hiện và văn bản nhận dạng được xuất ra"/>
+    <br/>*Biển số xe được phát hiện và văn bản nhận dạng được xuất ra*
+</div>
 
-![Ảnh Đầu vào Mẫu](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg) *Một ảnh đầu vào mẫu có biển số xe*
 
-![Ảnh Đầu ra Mẫu](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png) *Biển số xe được phát hiện và văn bản nhận dạng được xuất ra*
 
-## Kho lưu trữ GitHub:
+# Chinese:
 
-[Liên kết đến kho lưu trữ GitHub của bạn](https://github.com/coronatusvi/Image-detection-software)
-
-## Kết luận
-
-Dự án này thể hiện ứng dụng thực tế của thị giác máy tính trong một kịch bản thực tế. Phần mềm nhận diện hình ảnh này hoạt động như một giải pháp nhận dạng biển số xe tự động (ANPR), cung cấp lối vào liền mạch cho các phương tiện trong các gara đậu xe và cải thiện khả năng giám sát và theo dõi.
-
-Tôi rất hào hứng được giới thiệu dự án này tại Computer Vision Projects Expo 2024!
-```
-
-**Chinese Description:**
-
-```markdown
 # 停车场图像检测软件：实时越南车牌识别系统
 
 本项目展示了一个专为停车场（gara）设计的实时图像检测软件，专注于准确检测和识别越南车牌。通过结合深度学习技术与基于 Flask 的 Web 应用程序，该系统为自动化车辆进入和跟踪提供了一个强大而高效的解决方案。
@@ -93,22 +92,20 @@ Tôi rất hào hứng được giới thiệu dự án này tại Computer Visi
 
 ## 图片：
 
-![架构图](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/architecture.jpg)  *系统架构图示例*
-
-![示例输入](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/input.jpg) *带有车牌的示例输入图像*
-
-![示例输出](https://raw.githubusercontent.com/coronatusvi/Image-detection-software/refs/heads/main/images/flow.png) *检测到的车牌和识别的文本输出*
-
-## GitHub 存储库：
-
-[你的 GitHub 存储库的链接](https://github.com/coronatusvi/Image-detection-software)
-
-## 结论
-
-该项目展示了计算机视觉在现实场景中的实际应用。 此图像检测软件作为自动车牌识别 (ANPR) 解决方案，为停车场内的车辆提供无缝进入，并改进了监控和跟踪功能。
-
-我很高兴能在 2024 年计算机视觉项目博览会上展示这个项目！
-```
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/architecture.jpg?raw=true" width="600" alt="系统架构图示例"/>
+    <br/>*系统架构图示例*
+</div>
+<br/>
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/input.jpg?raw=true" width="600" alt="带有车牌的示例输入图像"/>
+    <br/>*带有车牌的示例输入图像*
+</div>
+<br/>
+<div align="center">
+    <img src="https://github.com/coronatusvi/Image-detection-software/blob/main/images/flow.png?raw=true" width="600" alt="检测到的车牌和识别的文本输出"/>
+    <br/>*检测到的车牌和识别的文本输出*
+</div>
 
 
 # Vietnamese License Plate
